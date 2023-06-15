@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-// import AuthModal from "@/components/AuthModal";
-// import SubscribeModal from "@/components/SubscribeModal";
-// import UploadModal from "@/components/UploadModal";
+import SubscribeModal from "@/components/SubscribeModal";
 import { ProductWithPrice } from "@/types";
 import AuthModal from "@/components/AuthModal";
 import UploadModal from "@/components/UploadModal";
@@ -28,12 +26,10 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ products }) => {
 
   return (
     <>
-    <AuthModal />
-    <UploadModal />
-      {/* <AuthModal />
+      <AuthModal />
+      <UploadModal />
+
       <SubscribeModal products={products} />
-       */}
-      
     </>
   );
 };

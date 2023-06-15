@@ -5,7 +5,7 @@ import Image from "next/image";
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import PlayButton from "./PlayButton";
-// import usePlayer from "@/hooks/usePlayer";
+import usePlayer from "@/hooks/usePlayer";
 import { MdDelete } from "react-icons/md";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import { toast } from "react-hot-toast";
@@ -19,7 +19,7 @@ interface MediaItemProps {
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({ data, onClick, page }) => {
-  //   const player = usePlayer();
+    const player = usePlayer();
   const imageUrl = useLoadImage(data);
   const router = useRouter();
   const { user : loggedInUser } = useUser();
@@ -30,7 +30,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick, page }) => {
       return onClick(data.id);
     }
 
-    // return player.setId(data.id);
+    return player.setId(data.id);
   };
 
   const handleDeleteSong = async (songId: string) => {

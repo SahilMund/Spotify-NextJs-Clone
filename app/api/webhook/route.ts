@@ -44,15 +44,19 @@ export async function POST(
       switch (event.type) {
         case 'product.created':
         case 'product.updated':
+          // Perform when product is created (or) updated
           await upsertProductRecord(event.data.object as Stripe.Product);
           break;
         case 'price.created':
         case 'price.updated':
+           // Perform when price is created (or) updated
           await upsertPriceRecord(event.data.object as Stripe.Price);
           break;
         case 'customer.subscription.created':
         case 'customer.subscription.updated':
         case 'customer.subscription.deleted':
+          // Perform when subscription is created (or) updated (or) deleted
+
           const subscription = event.data.object as Stripe.Subscription;
           await manageSubscriptionStatusChange(
             subscription.id,
