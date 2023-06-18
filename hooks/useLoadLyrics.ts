@@ -17,7 +17,7 @@ const useLoadLyrics =  (song: Song) => {
   const supabaseClient = useSupabaseClient();
 
   if (!song || !song.lyrics) {
-    return null;
+    return "No Lyrics available for this song";
   }
 
   try {

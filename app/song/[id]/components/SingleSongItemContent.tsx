@@ -13,10 +13,7 @@ const SingleSongItemContent: React.FC<SingleSongItemContentProps> = ({
 }) => {
   const [lyrics, setLyrics] = useState<any>(null);
 
-  //eslint-disable-next-line
-  const lyricsURL = !song.lyrics
-    ? "No Lyrics available for this song"
-    : useLoadLyrics(song);
+  const lyricsURL = useLoadLyrics(song);
 
 
   useEffect(() => {
