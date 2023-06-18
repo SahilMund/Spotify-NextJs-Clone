@@ -11,7 +11,6 @@ For DEMO, use [Stripe Testing Cards](https://stripe.com/docs/testing)
 
 This is a repository for a Full Stack Spotify Clone with Next.js 13.4 App Router: React, Tailwind, Supabase, PostgreSQL, Stripe
 
-[VIDEO TUTORIAL](https://youtu.be/2aeMRB8LL4o)
 
 Key Features:
 
@@ -47,7 +46,7 @@ Key Features:
 ### Cloning the repository
 
 ```shell
-git clone 
+git clone https://github.com/SahilMund/Spotify-NextJs-Clone.git
 ```
 
 ### Install packages
