@@ -9,7 +9,7 @@ import usePlayer from "@/hooks/usePlayer";
 import { MdDelete } from "react-icons/md";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import { toast } from "react-hot-toast";
-import { useUser } from '@/hooks/useUser';
+import { useUser } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
 
 interface MediaItemProps {
@@ -19,10 +19,10 @@ interface MediaItemProps {
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({ data, onClick, page }) => {
-    const player = usePlayer();
+  const player = usePlayer();
   const imageUrl = useLoadImage(data);
   const router = useRouter();
-  const { user : loggedInUser } = useUser();
+  const { user: loggedInUser } = useUser();
   const { supabaseClient } = useSessionContext();
 
   const handleClick = () => {
@@ -33,11 +33,37 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick, page }) => {
     return player.setId(data.id);
   };
 
-  const handleDeleteSong = async (songId: string) => {
+  const handleDeleteSong = async (song: Song) => {
+    const { id, image_path, song_path, lyrics } = song;
+
+    const { error: ImageError } = await supabaseClient.storage
+      .from("images")
+      .remove([image_path]);
+
+    if (ImageError) {
+      return toast.error(ImageError.message);
+    }
+
+    const { error: SongError } = await supabaseClient.storage
+      .from("songs")
+      .remove([song_path]);
+
+    if (SongError) {
+      return toast.error(SongError.message);
+    }
+
+    const { error: lyricsError } = await supabaseClient.storage
+      .from("lyrics")
+      .remove([lyrics]);
+
+    if (lyricsError) {
+      return toast.error(lyricsError.message);
+    }
+
     const { data, error } = await supabaseClient
       .from("songs")
       .delete()
-      .eq("id", songId);
+      .eq("id", id);
 
     if (error) {
       return toast.error(error.message);
@@ -100,7 +126,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick, page }) => {
       {page === "library" && loggedInUser && (
         <div className="flex flex-col gap-x-8 mt-4">
           <MdDelete
-            onClick={() => handleDeleteSong(data.id)}
+            onClick={() => handleDeleteSong(data)}
             size={20}
             className="text-red-600
         cursor-pointer

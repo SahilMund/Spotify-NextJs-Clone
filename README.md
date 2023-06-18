@@ -22,7 +22,7 @@ Key Features:
 - Full responsiveness for all devices
 - Credential authentication with Supabase
 - Github authentication integration
-- File and image upload using Supabase storage
+- File and image upload using Supabase storage (User can upload image, songs and lyrics)
 - Client form validation and handling using react-hook-form
 - Server error handling with react-toast
 - Play song audio
@@ -31,9 +31,14 @@ Key Features:
 - Advanced Player component
 - Stripe recurring payment integration
 - How to write POST, GET, and DELETE routes in route handlers (app/api)
-- How to fetch data in server React components by directly accessing the database (WITHOUT API! like Magic!)
+- How to fetch data in server React components by directly accessing the database 
 - Handling relations between Server and Child components in a real-time environment
+- User can delete their added songs
+- User can create their Playlist and add/remove songs to the playlist.
+- Disable liked page when user is not logged In --done
+- Playlist link sharing feature
 - Cancelling Stripe subscriptions
+
 
 ### Prerequisites
 
@@ -42,7 +47,7 @@ Key Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/AntonioErdeljac/next13-spotify.git
+git clone 
 ```
 
 ### Install packages
@@ -83,12 +88,6 @@ Running commands with npm `npm run [command]`
 
 
 
-TODO :-
 
-1. Add a edit button just in side of delete button to edit title,author and genre.
-2. In delete song button, implement to delete the data from buckets as well.
-3. add a file .txt upload option/any other alternative to upload lyrics and display it there . it will be a nullable filed.
-3. Add a table for albBums, user can create their album. And when click on add to playlist button one modal will be shown with a dropdown of all the present albums and then user can add/remove music to/from playlist.
-4. Add a slider to the music as well.
-5. Add a filter option by geners
-6. 
+
+

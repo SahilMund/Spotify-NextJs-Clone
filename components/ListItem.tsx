@@ -3,17 +3,25 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {FaPlay} from 'react-icons/fa';
+import useLoadThumbnail from "@/hooks/useLoadThumbnail";
+import {useUser} from "@/hooks/useUser";
 
 interface ListItemProps {
   image: string;
   name: string;
   href: string;
+  data: any
 }
 
-const ListItem: React.FC<ListItemProps> = ({ image, href, name }) => {
+const ListItem: React.FC<ListItemProps> = ({ image, href, name , data}) => {
   const router = useRouter();
+  const { user } = useUser();
 
+
+ // eslint-disable-next-line
+  const imagePath = image !== 'N/A' ? image :  useLoadThumbnail(data) as string;
   const handleOnClick = () => {
+    if(!user) return;
     router.push(href);
   };
 
@@ -40,7 +48,8 @@ const ListItem: React.FC<ListItemProps> = ({ image, href, name }) => {
         min-w-[64px]
         "
       >
-        <Image className="object-cover" fill src={image} alt="Image" />
+         {/* eslint-disable-next-line */}
+        <Image className="object-cover" fill src={imagePath} alt="Image" />
       </div>
 
       <p 

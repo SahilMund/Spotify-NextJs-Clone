@@ -1,4 +1,4 @@
-import Stripe from 'stripe';
+import Stripe from "stripe";
 
 export interface Song {
   id: string;
@@ -7,7 +7,8 @@ export interface Song {
   title: string;
   song_path: string;
   image_path: string;
-  geners : string
+  geners: string;
+  lyrics: string;
 }
 
 export interface Product {
@@ -17,6 +18,16 @@ export interface Product {
   description?: string;
   image?: string;
   metadata?: Stripe.Metadata;
+}
+
+export interface PlayList {
+  id: string;
+  Name: string;
+  Description: string;
+  Public: boolean;
+  songLists?: Song[];
+  user_id?: string;
+  thumbnail_path?: string;
 }
 
 export interface Price {

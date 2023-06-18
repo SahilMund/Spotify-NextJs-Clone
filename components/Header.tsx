@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             hover:opacity-75 
             transition"
           >
-            <HiHome className="text-black" size={20} />
+            <HiHome onClick={() => router.push('/')}  className="text-black" size={20} />
           </button>
           <button
             className="rounded-full p-2 bg-white 

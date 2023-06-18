@@ -1,6 +1,8 @@
 "use client";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import { CgPlayListAdd } from "react-icons/cg";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
@@ -8,6 +10,7 @@ import { Song } from "@/types";
 import MediaItem from "./MediaItem";
 import useOnPlay from "@/hooks/useOnPlay";
 import useSubscribeModal from "@/hooks/useSubscribeModal";
+import useCreatePlaylistModal from "@/hooks/useCreatePlaylistModal";
 
 interface LibraryProps {
   songs: Song[];
@@ -15,6 +18,7 @@ interface LibraryProps {
 const Library: React.FC<LibraryProps> = ({ songs }) => {
   const { user, subscription } = useUser();
   const uploadModal = useUploadModal();
+  const createPlaylistModal = useCreatePlaylistModal();
   const authModal = useAuthModal();
   const subscribeModal = useSubscribeModal();
 
@@ -32,9 +36,49 @@ const Library: React.FC<LibraryProps> = ({ songs }) => {
     return uploadModal.onOpen();
   };
 
+  const handleCreatePlaylist = () => {
+
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    if (!subscription) {
+      return subscribeModal.onOpen();
+    }
+
+    return createPlaylistModal.onOpen();
+
+  }
+
   return (
     <div className="flex flex-col">
       <div
+        className="
+    flex
+    items-center
+    justify-between
+    px-5
+    pt-4
+    "
+      >
+        <div className="inline-flex items-center gap-x-2">
+          <CgPlayListAdd size={26} className="text-neutral-400" />
+          <p className="text-neutral-400 font-medium text-md">Create Playlist</p>
+        </div>
+        <IoIosAddCircleOutline
+          onClick={handleCreatePlaylist}
+          size={20}
+          className="text-neutral-400
+        cursor-pointer
+        hover:text-white
+        transition
+       
+        "
+        />
+      </div>
+      <hr className="mt-2 bg-neutral-400"/>
+      <div
+
         className="
     flex
     items-center

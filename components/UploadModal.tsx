@@ -32,6 +32,7 @@ const UploadModal = () => {
       title: '',
       song: null,
       image: null,
+      lyrics : null
     }
   });
 
@@ -50,6 +51,7 @@ const UploadModal = () => {
       
       const imageFile = values.image?.[0];
       const songFile = values.song?.[0];
+      const lyricsFile = values.lyrics?.[0];
 
       if (!imageFile || !songFile || !user) {
         toast.error('Missing fields')
@@ -92,6 +94,26 @@ const UploadModal = () => {
         return toast.error('Failed image upload');
       }
 
+
+      // Upload Lyrics file
+      const { 
+        data: lyricsData, 
+        error: lyricsError
+      } = await supabaseClient
+        .storage
+        .from('lyrics')
+        .upload(`lyric-${values.title}-${uniqueID}`, lyricsFile, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (lyricsError) {
+        console.log(lyricsError);
+        
+        setIsLoading(false);
+        return toast.error('Failed lyrics upload');
+      }
+
       
       // Create record 
       const { error: supabaseError } = await supabaseClient
@@ -102,7 +124,8 @@ const UploadModal = () => {
           author: values.author,
           image_path: imageData.path,
           song_path: songData.path,
-          geners : values.geners
+          geners : values.geners,
+          lyrics : lyricsData.path
         });
 
       if (supabaseError) {
@@ -124,7 +147,7 @@ const UploadModal = () => {
   return (
     <Modal
       title="Add a song"
-      description="Upload an mp3 file"
+      description=""
       isOpen={uploadModal.isOpen}
       onChange={onChange}
     >
@@ -176,7 +199,19 @@ const UploadModal = () => {
             {...register('image', { required: true })}
           />
         </div>
-        <Button disabled={isLoading} type="submit">
+        <div>
+          <div className="pb-1">
+            Select lyrics for the music (optional)
+          </div>
+          <Input
+            placeholder="Lyrics" 
+            disabled={isLoading}
+            type="file"
+            id="lyrics"
+            {...register('lyrics')}
+          />
+        </div>
+        <Button  disabled={isLoading} type="submit">
           Create
         </Button>
       </form>
