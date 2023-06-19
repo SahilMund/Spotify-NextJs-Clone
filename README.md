@@ -1,3 +1,10 @@
+# Spotify Clone - Next.js
+
+- Developed a full-stack Spotify Clone using Next.js 13.4, React, Tailwind, Supabase, PostgreSQL, and Stripe integration, providing users with a seamless music streaming experience, user authentication, and secure payment processing.
+- Implemented features such as song uploading, user authentication through Supabase and GitHub, file and image uploading using Supabase storage, playlist and liked songs management, advanced player component, responsive UI design with Tailwind, and integration with Stripe for recurring payments and subscription management.
+- Implemented Stripe subscription cancellation functionality for the Full Stack Spotify Clone project.
+- Integrated with the Stripe API to handle subscription management and cancellation requests.
+
 # To create a App
 
 ```
