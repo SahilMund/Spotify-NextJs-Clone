@@ -11,7 +11,8 @@ const HeaderContent: React.FC<HeaderContentProps> = ({ title }) => {
   const { user } = useUser();
 
   const handleLinkShare = () => {
-    const link = `http://localhost:3000/playlist/access-requested/${title}`;
+    // const link = `http://localhost:3000/playlist/access-requested/${title}`;
+    const link = `https://spotify-next-js-clone.vercel.app/playlist/access-requested/${title}`;
 
     navigator.clipboard.writeText(link);
     alert('Link Copied to your clipboard, share it with you friend');
